@@ -26,15 +26,6 @@ def elabora(l):
     arr.append(word)
     return arr
 
-'''
-def tabella2(lst): 
-  row=[]
-  for item in lst:
-      ss=item.split("=")
-      row.append(ss[1])
-  return row
-'''
-
 def tabella(lst):
   dic = {}
   for item in lst:
@@ -42,6 +33,7 @@ def tabella(lst):
     dic[ss[0]] = ss[1]
   return dic
 
+# Funzione che elabora linea per linea ed estrapola i valori inseriti in input come condizione
 def outputMatrix(campo, riga):
   for valore in riga:
     if valore == campo:
@@ -87,10 +79,3 @@ with open(log, "rt") as f:
 for riga in matriceDiz:
   for campo in lstCampi:
     outputMatrix(campo, riga) 
-
-'''    
-    for match in dictV:
-      if re.search(match, line):
-        lines.append(line)
-'''
-
