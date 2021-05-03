@@ -15,6 +15,18 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
 
+# Classe per i colori del testo
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 # Funziona che elabora la linea per determinare i valori del log
 def elabora(l):
   word = ""
@@ -70,7 +82,7 @@ n = 0
 try:
   n = int(input("Inserisci quanti valori vuoi ricercare [Min 1, Max 4]: "))
 except KeyboardInterrupt:
-  print("\nScript interrotto dall'utente")
+  print(f"{bcolors.WARNING}\nScript interrotto dall'utente{bcolors.ENDC}")
   exit()
 
 while n < 1 or n > 4:
