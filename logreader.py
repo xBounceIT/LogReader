@@ -61,7 +61,7 @@ def tabella(lst):
 def outputMatrix(campo, riga):
   for valore in riga:
     if valore == campo:
-      print(valore, "=", riga[valore])
+      print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
       continue
 
 syncsec()
