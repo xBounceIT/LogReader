@@ -69,6 +69,7 @@ def main():
   syncsec()
   print("\nLogReader", version, "\n")
 
+  # TODO: Leggi log multipli, riabilitare file in input #
   log = "testlog.txt"
 
   # Dizionario dei parametri
