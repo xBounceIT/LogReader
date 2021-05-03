@@ -65,7 +65,13 @@ dizCampi = {
   4: "msg"
 }
 
-n = int(input("Inserisci quanti valori vuoi ricercare [Min 1, Max 4]: "))
+n = 0
+
+try:
+  n = int(input("Inserisci quanti valori vuoi ricercare [Min 1, Max 4]: "))
+except KeyboardInterrupt:
+  print("\nScript interrotto dall'utente")
+  exit()
 
 while n < 1 or n > 4:
   n = int(input("Input errato, riprovare: "))
