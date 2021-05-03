@@ -64,6 +64,7 @@ def outputMatrix(campo, riga):
       print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
       continue
 
+# Main Thread
 def main():
   syncsec()
   print("\nLogReader", version, "\n")
@@ -112,5 +113,6 @@ def main():
     for campo in lstCampi:
       outputMatrix(campo, riga) 
 
+# Condizione che verifica se lo script fa parte di un modulo oppure se lo script e' solo in esecuzione. Se e' solo in esecuzione fa partire il main thread
 if __name__ == "__main__":
   main()
