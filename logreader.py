@@ -1,7 +1,19 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
 version = "0.1"
-import re
+
+def syncsec():
+  print("\n$$$$$$\                                    $$$$$$\                                      $$\  $$\              ")
+  print("$$  __$$\                                  $$  __$$\                                    \__| $$ |             ")
+  print("$$ /  \__$$\   $$\$$$$$$$\  $$$$$$$\       $$ /  \__|$$$$$$\  $$$$$$$\$$\   $$\ $$$$$$\ $$\$$$$$$\  $$\   $$\ ")
+  print("\$$$$$$\ $$ |  $$ $$  __$$\$$  _____|      \$$$$$$\ $$  __$$\$$  _____$$ |  $$ $$  __$$\$$ \_$$  _| $$ |  $$ |")
+  print(" \____$$\$$ |  $$ $$ |  $$ $$ /             \____$$\$$$$$$$$ $$ /     $$ |  $$ $$ |  \__$$ | $$ |   $$ |  $$ |")
+  print("$$\   $$ $$ |  $$ $$ |  $$ $$ |            $$\   $$ $$   ____$$ |     $$ |  $$ $$ |     $$ | $$ |$$\$$ |  $$ |")
+  print("\$$$$$$  \$$$$$$$ $$ |  $$ \$$$$$$$\       \$$$$$$  \$$$$$$$\\$$$$$$$\\$$$$$$  $$ |     $$ | \$$$$  \$$$$$$$ |")
+  print(" \______/ \____$$ \__|  \__|\_______|       \______/ \_______|\_______|\______/\__|     \__|  \____/ \____$$ |")
+  print("         $$\   $$ |                                                                                 $$\   $$ |")
+  print("         \$$$$$$  |                                                                                 \$$$$$$  |")
+  print("          \______/                                                                                   \______/ \n")
 
 # Funziona che elabora la linea per determinare i valori del log
 def elabora(l):
@@ -11,10 +23,9 @@ def elabora(l):
   for i in range(len(l)):
     if l[i] == '"':
       found += 1
-      continue #rimuove doppio apice da output
+      continue # rimuove doppio apice da output
     if l[i] == " ":
       if found == 1:
-        #prosegui, testo
         word += l[i]
         continue
       else:
@@ -26,6 +37,7 @@ def elabora(l):
   arr.append(word)
   return arr
 
+# Funzione che prende la linea come parametro e crea un dizionario dividendo la chiave dal valore
 def tabella(lst):
   dic = {}
   for item in lst:
@@ -33,13 +45,14 @@ def tabella(lst):
     dic[ss[0]] = ss[1]
   return dic
 
-# Funzione che elabora linea per linea ed estrapola i valori inseriti in input come condizione
+# Funzione che elabora le linee della matrice ed estrapola i valori inseriti in input come condizione
 def outputMatrix(campo, riga):
   for valore in riga:
     if valore == campo:
       print(valore, "=", riga[valore])
       continue
 
+syncsec()
 print("\nLogReader", version, "\n")
 
 log = "testlog.txt"
