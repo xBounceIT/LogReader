@@ -1,4 +1,4 @@
 # LogReader
-Log Reader v0.1
+Python script to parse a set of data from a specific log
 
 From: Daniel D'Angeli && Ugo Monticone, email: daniel.dangeli@syncsecurity.it 
