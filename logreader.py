@@ -5,26 +5,26 @@ import re
 
 # Funziona che elabora la linea per determinare i valori del log
 def elabora(l):
-    word = ""
-    arr = []
-    found = 0
-    for i in range(len(l)):
-        if l[i] == '"':
-            found += 1
-            continue #rimuove doppio apice da output
-        if l[i] == " ":
-            if found == 1:
-                #prosegui, testo
-                word += l[i]
-                continue
-            else:
-                arr.append(word)
-                word = ""
-                found = 0
-                continue
+  word = ""
+  arr = []
+  found = 0
+  for i in range(len(l)):
+    if l[i] == '"':
+      found += 1
+      continue #rimuove doppio apice da output
+    if l[i] == " ":
+      if found == 1:
+        #prosegui, testo
         word += l[i]
-    arr.append(word)
-    return arr
+        continue
+      else:
+        arr.append(word)
+        word = ""
+        found = 0
+        continue
+    word += l[i]
+  arr.append(word)
+  return arr
 
 def tabella(lst):
   dic = {}
