@@ -1,6 +1,6 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
-version = "0.1"
+version = "0.7b"
 
 def syncsec():
   print("\n  $$$$$$\                                    $$$$$$\                                    $$\  $$\              ")
@@ -64,49 +64,53 @@ def outputMatrix(campo, riga):
       print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
       continue
 
-syncsec()
-print("\nLogReader", version, "\n")
+def main():
+  syncsec()
+  print("\nLogReader", version, "\n")
 
-log = "testlog.txt"
+  log = "testlog.txt"
 
-# Dizionario dei parametri
-dizCampi = {
-  1: "action",
-  2: "src",
-  3: "dst",
-  4: "msg"
-}
+  # Dizionario dei parametri
+  dizCampi = {
+    1: "action",
+    2: "src",
+    3: "dst",
+    4: "msg"
+  }
 
-n = 0
+  n = 0
 
-try:
-  n = int(input("Inserisci quanti valori vuoi ricercare [Min 1, Max 4]: "))
-except KeyboardInterrupt:
-  print(f"{bcolors.WARNING}\nScript interrotto dall'utente{bcolors.ENDC}")
-  exit()
+  try:
+    n = int(input("Inserisci quanti valori vuoi ricercare [Min 1, Max 4]: "))
+  except KeyboardInterrupt:
+    print(f"{bcolors.WARNING}\nScript interrotto dall'utente{bcolors.ENDC}")
+    exit()
 
-while n < 1 or n > 4:
-  n = int(input("Input errato, riprovare: "))
+  while n < 1 or n > 4:
+    n = int(input("Input errato, riprovare: "))
 
-lstCampi = []
+  lstCampi = []
 
-# Inserimento dei requisiti nell'array
-for i in range(0, n):
-  campo = int(input("Inserisci i campi da ricercare [1 = action, 2 = src, 3 = dst, 4 = msg]: "))
-  lstCampi.append(dizCampi[campo])
+  # Inserimento dei requisiti nell'array
+  for i in range(0, n):
+    campo = int(input("Inserisci i campi da ricercare [1 = action, 2 = src, 3 = dst, 4 = msg]: "))
+    lstCampi.append(dizCampi[campo])
 
-# Check che rimuove i duplicati inseriti se ci sono
-lstCampi = list(dict.fromkeys(lstCampi))
+  # Check che rimuove i duplicati inseriti se ci sono
+  lstCampi = list(dict.fromkeys(lstCampi))
 
-matriceDiz = []
+  matriceDiz = []
 
-# Legge il file
-with open(log, "rt") as f:
-  f = f.readlines()
-  for line in f:
-    linea = elabora(line)
-    matriceDiz.append(tabella(linea))
+  # Legge il file
+  with open(log, "rt") as f:
+    f = f.readlines()
+    for line in f:
+      linea = elabora(line)
+      matriceDiz.append(tabella(linea))
 
-for riga in matriceDiz:
-  for campo in lstCampi:
-    outputMatrix(campo, riga) 
+  for riga in matriceDiz:
+    for campo in lstCampi:
+      outputMatrix(campo, riga) 
+
+if __name__ == "__main__":
+  main()
