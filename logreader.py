@@ -1,7 +1,6 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
-version = "0.3"
-nLog = 0
+version = "0.3.1"
 
 def syncsec():
   print("\n  $$$$$$\                                    $$$$$$\                                    $$\  $$\              ")
@@ -65,8 +64,10 @@ def outputMatrix(campo, riga):
       print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
       continue
 
+# Funziona che chiede in input i log da leggere e parsa i file
 def parser():
   logs = []
+  nLog = 0
   try:
     nLog = int(input("Quanti log vuoi leggere?: "))
   except KeyboardInterrupt:
@@ -75,7 +76,13 @@ def parser():
 
   for i in range(0, nLog):
     print("Inserisci la path del", i + 1, "log: ")
-    log = input()  
+    log = ""
+    try:
+      log = input()
+    except KeyboardInterrupt:
+      print(f"{bcolors.WARNING}\nScript interrotto dall'utente{bcolors.ENDC}")
+      exit()
+
     if log:
       with open(log, "rt") as f:
         f = f.readlines()
@@ -90,7 +97,6 @@ def main():
   syncsec()
   print("\nLogReader", version, "\n")
 
-  # TODO: Leggi log multipli, riabilitare file in input #
   logs = parser()
 
   # Dizionario dei parametri
