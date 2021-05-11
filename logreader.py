@@ -1,6 +1,7 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
-version = "0.7b"
+version = "0.3"
+nLog = 0
 
 def syncsec():
   print("\n  $$$$$$\                                    $$$$$$\                                    $$\  $$\              ")
@@ -64,13 +65,33 @@ def outputMatrix(campo, riga):
       print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
       continue
 
+def parser():
+  logs = []
+  try:
+    nLog = int(input("Quanti log vuoi leggere?: "))
+  except KeyboardInterrupt:
+    print(f"{bcolors.WARNING}\nScript interrotto dall'utente{bcolors.ENDC}")
+    exit()
+
+  for i in range(0, nLog):
+    print("Inserisci la path del", i + 1, "log: ")
+    log = input()  
+    if log:
+      with open(log, "rt") as f:
+        f = f.readlines()
+        logs.append(f)
+        continue
+    else:
+      continue
+  return logs
+
 # Main Thread
 def main():
   syncsec()
   print("\nLogReader", version, "\n")
 
   # TODO: Leggi log multipli, riabilitare file in input #
-  log = "testlog.txt"
+  logs = parser()
 
   # Dizionario dei parametri
   dizCampi = {
@@ -104,9 +125,8 @@ def main():
   matriceDiz = []
 
   # Legge il file
-  with open(log, "rt") as f:
-    f = f.readlines()
-    for line in f:
+  for log in logs:
+    for line in log:
       linea = elabora(line)
       matriceDiz.append(tabella(linea))
 
