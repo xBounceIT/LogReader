@@ -20,7 +20,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader 0.4 beta2\n")
+  print("\nLogReader 0.4 BETA3\n")
   return 0
 
 # Classe per i colori del testo
@@ -153,7 +153,13 @@ def main():
   print("MENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n")
   scelta = int(input("Selezionare un opzione: "))
   clear()
-  
+
+  while scelta < 1 or scelta > 3:
+    print(f"{bcolors.WARNING}Opzione inserita non valida. Reinserire{bcolors.ENDC}")
+    print("\nMENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n")
+    scelta = int(input("Selezionare un opzione: "))
+    clear()
+
   if scelta == 1:
     noInput(logs)
   elif scelta == 2:
