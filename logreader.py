@@ -1,6 +1,9 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
-version = "0.3.1"
+from os import system
+
+def clear():
+  system('cls')
 
 def syncsec():
   print("\n  $$$$$$\                                    $$$$$$\                                    $$\  $$\              ")
@@ -14,6 +17,8 @@ def syncsec():
   print("         $$\   $$ |                                                                                 $$\   $$ |")
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
+  
+  print("\nLogReader 0.4b\n")
 
 # Classe per i colori del testo
 class bcolors:
@@ -62,43 +67,44 @@ def outputMatrix(campo, riga):
   for valore in riga:
     if valore == campo:
       print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
-      continue
+      break
 
 # Funziona che chiede in input i log da leggere e parsa i file
 def parser():
   logs = []
-  nLog = 0
-  try:
-    nLog = int(input("Quanti log vuoi leggere?: "))
-  except KeyboardInterrupt:
-    print(f"{bcolors.WARNING}\nScript interrotto dall'utente{bcolors.ENDC}")
-    exit()
+  nLog = int(input("Quanti log vuoi leggere?: "))
+  clear()
 
   for i in range(0, nLog):
     print("Inserisci la path del", i + 1, "log: ")
-    log = ""
-    try:
-      log = input()
-    except KeyboardInterrupt:
-      print(f"{bcolors.WARNING}\nScript interrotto dall'utente{bcolors.ENDC}")
-      exit()
+    log = input()
 
-    if log:
-      with open(log, "rt") as f:
-        f = f.readlines()
-        logs.append(f)
-        continue
-    else:
+    with open(log, "rt") as f:
+      f = f.readlines()
+      logs.append(f)
       continue
-  return logs
+    
+  matriceDiz = []
 
-# Main Thread
-def main():
-  syncsec()
-  print("\nLogReader", version, "\n")
+  # Legge ed elabora il file
+  for log in logs:
+    for line in log:
+      linea = elabora(line)
+      matriceDiz.append(tabella(linea))
+  return matriceDiz
 
-  logs = parser()
+# TODO #
+def noInput():
+  
+  return
 
+# TODO #
+def ipSearch():
+  ip = input("Inserisci l'ip da ricercare: ")
+
+  return
+
+def fieldSearch(logs):
   # Dizionario dei parametri
   dizCampi = {
     1: "action",
@@ -107,18 +113,13 @@ def main():
     4: "msg"
   }
 
-  n = 0
-
-  try:
-    n = int(input("Inserisci quanti valori vuoi ricercare [Min 1, Max 4]: "))
-  except KeyboardInterrupt:
-    print(f"{bcolors.WARNING}\nScript interrotto dall'utente{bcolors.ENDC}")
-    exit()
+  n = int(input("Inserisci quanti valori vuoi ricercare [Min 1, Max 4]: "))
 
   while n < 1 or n > 4:
     n = int(input("Input errato, riprovare: "))
 
   lstCampi = []
+  clear()
 
   # Inserimento dei requisiti nell'array
   for i in range(0, n):
@@ -127,19 +128,33 @@ def main():
 
   # Check che rimuove i duplicati inseriti se ci sono
   lstCampi = list(dict.fromkeys(lstCampi))
-
-  matriceDiz = []
-
-  # Legge il file
-  for log in logs:
-    for line in log:
-      linea = elabora(line)
-      matriceDiz.append(tabella(linea))
-
-  for riga in matriceDiz:
+  
+  for riga in logs:
     for campo in lstCampi:
-      outputMatrix(campo, riga) 
+      outputMatrix(campo, riga)
+
+# Main Thread
+def main():
+  syncsec()
+
+  logs = parser()
+  clear()
+
+  print("MENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n")
+  scelta = int(input("Selezionare un opzione: "))
+  clear()
+  
+  if scelta == 1:
+    noInput(logs)
+  elif scelta == 2:
+    ipSearch(logs)
+  elif scelta == 3:
+    fieldSearch(logs)
 
 # Condizione che verifica se lo script fa parte di un modulo oppure se lo script e' solo in esecuzione. Se e' solo in esecuzione fa partire il main thread
 if __name__ == "__main__":
-  main()
+  try:
+    main()
+  except KeyboardInterrupt:
+    print(f"\n{bcolors.WARNING}Script interrotto dall'utente{bcolors.ENDC}")
+    exit()
