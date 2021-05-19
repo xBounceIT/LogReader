@@ -6,7 +6,6 @@ def clear():
   system('cls')
   return 0
 
-
 def syncsec():
   print("\n  $$$$$$\                                    $$$$$$\                                    $$\  $$\              ")
   print("$$  __$$\                                  $$  __$$\                                    \__| $$ |             ")
