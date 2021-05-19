@@ -4,6 +4,8 @@ from os import system
 
 def clear():
   system('cls')
+  return 0
+
 
 def syncsec():
   print("\n  $$$$$$\                                    $$$$$$\                                    $$\  $$\              ")
@@ -19,6 +21,7 @@ def syncsec():
   print("          \______/                                                                                   \______/ \n")
   
   print("\nLogReader 0.4b\n")
+  return 0
 
 # Classe per i colori del testo
 class bcolors:
@@ -94,15 +97,21 @@ def parser():
   return matriceDiz
 
 # TODO #
-def noInput():
+def noInput(logs):
   
-  return
+  return 0
 
 # TODO #
-def ipSearch():
+def ipSearch(logs):
   ip = input("Inserisci l'ip da ricercare: ")
-
-  return
+  cont = 0
+  for riga in logs:
+    for campo in riga:
+      if riga[campo] == ip:
+        cont += 1
+  clear()
+  print(f"{bcolors.WARNING}L'IP è stato trovato", cont, f"volte{bcolors.ENDC}")  
+  return 0
 
 def fieldSearch(logs):
   # Dizionario dei parametri
@@ -132,6 +141,7 @@ def fieldSearch(logs):
   for riga in logs:
     for campo in lstCampi:
       outputMatrix(campo, riga)
+  return 0
 
 # Main Thread
 def main():
@@ -150,6 +160,8 @@ def main():
     ipSearch(logs)
   elif scelta == 3:
     fieldSearch(logs)
+  
+  return 0
 
 # Condizione che verifica se lo script fa parte di un modulo oppure se lo script e' solo in esecuzione. Se e' solo in esecuzione fa partire il main thread
 if __name__ == "__main__":
