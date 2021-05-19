@@ -100,7 +100,6 @@ def noInput(logs):
   
   return 0
 
-# TODO #
 def ipSearch(logs):
   ip = input("Inserisci l'ip da ricercare: ")
   cont = 0
