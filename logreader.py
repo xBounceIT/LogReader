@@ -19,7 +19,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader 0.4\n")
+  print("\nLogReader 0.4.1\n")
   return 0
 
 # Classe per i colori del testo
@@ -111,7 +111,8 @@ def ipSearch(logs):
       if riga[campo] == ip:
         cont += 1
   clear()
-  print(f"{bcolors.WARNING}L'IP è stato trovato", cont, f"volte{bcolors.ENDC}")
+  print(f"L'IP è stato trovato{bcolors.WARNING}", cont, f"{bcolors.ENDC}volte")
+  menu(logs)
   return 0
 
 def fieldSearch(logs):
@@ -145,16 +146,12 @@ def fieldSearch(logs):
     for campo in lstCampi:
       frase.append(outputMatrix(campo, riga))
     print(f"{bcolors.WARNING}", cond.join(frase), f"{bcolors.ENDC}")
+
+  menu(logs)
   return 0
 
-# Main Thread
-def main():
-  syncsec()
-
-  logs = parser()
-  clear()
-
-  print("MENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n")
+def menu(logs):
+  print("\nMENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n4. Esci\n")
   scelta = int(input("Selezionare un opzione: "))
   clear()
 
@@ -170,7 +167,16 @@ def main():
     ipSearch(logs)
   elif scelta == 3:
     fieldSearch(logs)
-  
+  elif scelta == 4:
+    print("Termino...")
+    exit()
+
+# Main Thread
+def main():
+  syncsec()
+  logs = parser()
+  clear()
+  menu(logs)
   return 0
 
 # Condizione che verifica se lo script fa parte di un modulo oppure se lo script e' solo in esecuzione. Se e' solo in esecuzione fa partire il main thread
