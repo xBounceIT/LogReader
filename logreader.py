@@ -19,7 +19,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader 0.4 BETA3\n")
+  print("\nLogReader 0.4\n")
   return 0
 
 # Classe per i colori del testo
@@ -66,10 +66,13 @@ def tabella(lst):
 
 # Funzione che elabora le linee della matrice ed estrapola i valori inseriti in input come condizione
 def outputMatrix(campo, riga):
-  for valore in riga:
+  for valore in riga: 
+    frase = ""
     if valore == campo:
-      print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
+      # print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
+      frase = (valore + "=" + riga[valore])
       break
+  return frase
 
 # Funziona che chiede in input i log da leggere e parsa i file
 def parser():
@@ -80,7 +83,7 @@ def parser():
   for i in range(0, nLog):
     print("Inserisci la path del", i + 1, "log: ")
     log = input()
-
+    clear()
     with open(log, "rt") as f:
       f = f.readlines()
       logs.append(f)
@@ -108,7 +111,7 @@ def ipSearch(logs):
       if riga[campo] == ip:
         cont += 1
   clear()
-  print(f"{bcolors.WARNING}L'IP è stato trovato", cont, f"volte{bcolors.ENDC}")  
+  print(f"{bcolors.WARNING}L'IP è stato trovato", cont, f"volte{bcolors.ENDC}")
   return 0
 
 def fieldSearch(logs):
@@ -135,10 +138,13 @@ def fieldSearch(logs):
 
   # Check che rimuove i duplicati inseriti se ci sono
   lstCampi = list(dict.fromkeys(lstCampi))
-  
+  cond = " "
+
   for riga in logs:
+    frase = []
     for campo in lstCampi:
-      outputMatrix(campo, riga)
+      frase.append(outputMatrix(campo, riga))
+    print(f"{bcolors.WARNING}", cond.join(frase), f"{bcolors.ENDC}")
   return 0
 
 # Main Thread
