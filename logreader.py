@@ -1,6 +1,6 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
-from os import system
+from os import system, truncate
 
 def clear():
   system('cls')
@@ -19,7 +19,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader 0.4.1\n")
+  print("\nLogReader v0.5\n")
   return 0
 
 # Classe per i colori del testo
@@ -69,7 +69,6 @@ def outputMatrix(campo, riga):
   for valore in riga: 
     frase = ""
     if valore == campo:
-      # print(valore, "=", bcolors.WARNING + riga[valore] + bcolors.ENDC)
       frase = (valore + "=" + riga[valore])
       break
   return frase
@@ -80,15 +79,51 @@ def parser():
   nLog = int(input("Quanti log vuoi leggere?: "))
   clear()
 
+  if nLog == 0:
+    clear()
+    scelta = input("Hai inserito 0, reinserire? [Y / N]: ")
+    while scelta != "y" and scelta != "n":
+      clear()
+      print(f"{bcolors.WARNING}Risposta invalida, riprova{bcolors.ENDC}")
+      scelta = input("Hai inserito 0, reinserire? [Y / N]: ")
+    scelta = scelta.lower()
+    if scelta == "y":
+      clear()
+      parser()
+    elif scelta == "n":
+      clear()
+      exit("Termino...")
+
+  countLog = 0
+
   for i in range(0, nLog):
     print("Inserisci la path del", i + 1, "log: ")
     log = input()
     clear()
-    with open(log, "rt") as f:
-      f = f.readlines()
-      logs.append(f)
-      continue
-    
+    while True:
+      try:
+        with open(log, "rt") as f:
+          f = f.readlines()
+          logs.append(f)
+          countLog += 1
+          break
+      except FileNotFoundError:
+        scelta = input("File non trovato, reinserire? [y/n]: ")
+        scelta = scelta.lower()
+        while scelta != "y" and scelta != "n":
+          scelta = input("Risposta invalida, reinserire? [y/n]: ")
+          scelta = scelta.lower()
+        if scelta == "y":
+          print("Inserisci la path del", i + 1, "log: ")
+          log = input()
+          continue
+        elif scelta == "n":
+          print("Salto...")
+          break
+
+  if countLog == 0:
+    exit(f"{bcolors.WARNING}Nessun log inserito, termino{bcolors.ENDC}")
+
   matriceDiz = []
 
   # Legge ed elabora il file
@@ -124,21 +159,39 @@ def fieldSearch(logs):
     4: "msg"
   }
 
-  n = int(input("Inserisci quanti valori vuoi ricercare [Min 1, Max 4]: "))
+  n = 0
 
-  while n < 1 or n > 4:
-    n = int(input("Input errato, riprovare: "))
+  while True and n < 1 or n > 4:
+    try:
+      n = int(input("Inserisci quanti campi vuoi ricercare [Min 1, Max 4]: "))
+      if n == 0:
+        clear()
+        print(f"{bcolors.WARNING}Impossibile ricercare 0 campi, riprova{bcolors.ENDC}")
+        continue
+      else:
+        break
+    except ValueError:
+      clear()
+      print(f"{bcolors.WARNING}Input inserito non numerico, riprovare{bcolors.ENDC}")
 
   lstCampi = []
   clear()
 
   # Inserimento dei requisiti nell'array
   for i in range(0, n):
-    campo = int(input("Inserisci i campi da ricercare [1 = action, 2 = src, 3 = dst, 4 = msg]: "))
+    while True:
+      try:
+        campo = int(input("Inserisci i campi da ricercare [1 = action, 2 = src, 3 = dst, 4 = msg]: "))
+        break
+      except ValueError:
+        clear()
+        print(f"{bcolors.WARNING}Valore inserito non numerico, riprova{bcolors.ENDC}\n")
     lstCampi.append(dizCampi[campo])
 
   # Check che rimuove i duplicati inseriti se ci sono
   lstCampi = list(dict.fromkeys(lstCampi))
+
+  # Condizione del join per fare comparire in output una riga pulita, altrimenti output con parentesi quadrate
   cond = " "
 
   for riga in logs:
@@ -152,13 +205,19 @@ def fieldSearch(logs):
 
 def menu(logs):
   print("\nMENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n4. Esci\n")
-  scelta = int(input("Selezionare un opzione: "))
+  while True:
+    try:
+      scelta = int(input("Selezionare un opzione: "))
+      break
+    except ValueError:
+      clear()
+      print(f"{bcolors.WARNING}Valore inserito non numerico.{bcolors.ENDC}")
+      menu(logs)
   clear()
 
-  while scelta < 1 or scelta > 3:
+  while scelta < 1 or scelta > 4:
     print(f"{bcolors.WARNING}Opzione inserita non valida. Reinserire{bcolors.ENDC}")
-    print("\nMENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n")
-    scelta = int(input("Selezionare un opzione: "))
+    menu(logs)
     clear()
 
   if scelta == 1:
@@ -168,8 +227,7 @@ def menu(logs):
   elif scelta == 3:
     fieldSearch(logs)
   elif scelta == 4:
-    print("Termino...")
-    exit()
+    exit(f"{bcolors.WARNING}Script terminato con successo.{bcolors.ENDC}")
 
 # Main Thread
 def main():
@@ -184,5 +242,4 @@ if __name__ == "__main__":
   try:
     main()
   except KeyboardInterrupt:
-    print(f"\n{bcolors.WARNING}Script interrotto dall'utente{bcolors.ENDC}")
-    exit()
+    exit(f"\n{bcolors.WARNING}Script interrotto dall'utente{bcolors.ENDC}")
