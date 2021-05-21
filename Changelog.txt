@@ -1,0 +1,18 @@
+v0.5
+- Fixed 0 log input
+- Handled the exception caused by a wrong file input
+- Handled the exception caused by a wrong choice when searching for fields
+- Handled the exception caused by inputting 0 when choosing how many fields to look for
+- Handled the exception caused by inputting a non numeric value when choosing which field to look for
+- Handled the exception caused by inputting a non numeric value when choosing how many fields to look for
+- Miscellaneous changes
+
+v0.6 Roadmap
+- Define noInput() function
+- Handle more exceptions
+- Define check if ip in ipSearch() input is actually an ip
+
+v1.0 Milestone
+- Improve log reading performance by using iter()
+- Use a config file 
+- ...
