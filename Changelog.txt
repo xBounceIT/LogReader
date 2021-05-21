@@ -1,3 +1,28 @@
+v0.3
+- Added multiple log support
+- Added example files
+- Enabled log input again
+
+v0.3.1
+- Removed useless variable
+- Handled more exceptions
+- Removed obsolete comments
+
+v0.4
+- Cleaned and reorganized code
+- Added a menu
+- Added ipSearch function
+- Added some return codes
+- Made results appear all in one line for each row to better display the output
+- Improved log parsing performance
+- Handled the exception caused by choosing a non existent option in the menu
+- Fixed more crashes
+
+v0.4.1
+- Added menu redundancy for better workflow
+- Added real life logs to better test the environment
+- Added a changelog to log roadmaps and changes
+
 v0.5
 - Fixed 0 log input
 - Handled the exception caused by a wrong file input
@@ -5,6 +30,11 @@ v0.5
 - Handled the exception caused by inputting 0 when choosing how many fields to look for
 - Handled the exception caused by inputting a non numeric value when choosing which field to look for
 - Handled the exception caused by inputting a non numeric value when choosing how many fields to look for
+- Miscellaneous changes
+
+v0.5.1
+- Handled exception caused by inputting a non numeric value when choosing how many logs to read
+- Fixed loop-logic when wrongly inputting log path twice
 - Miscellaneous changes
 
 v0.5.2
