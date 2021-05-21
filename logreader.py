@@ -73,36 +73,22 @@ def outputMatrix(campo, riga):
       break
   return frase
 
-def logRead():
-
-  return
-
 # Funziona che chiede in input i log da leggere e parsa i file
 def parser():
   logs = []
   while True:
     try:
       nLog = int(input("Quanti log vuoi leggere?: "))
+      if nLog == 0:
+        clear()
+        print(f"{bcolors.WARNING}Non puoi inserire 0 log.{bcolors.ENDC}")
+        continue
       clear()
       break
     except ValueError:
       clear()
       print(f"{bcolors.WARNING}Valore inserito non numerico.{bcolors.ENDC}")
-
-  if nLog == 0:
-    clear()
-    scelta = input("Hai inserito 0, reinserire? [Y / N]: ")
-    while scelta != "y" and scelta != "n":
-      clear()
-      print(f"{bcolors.WARNING}Risposta invalida, riprova{bcolors.ENDC}")
-      scelta = input("Hai inserito 0, reinserire? [Y / N]: ")
-    scelta = scelta.lower()
-    if scelta == "y":
-      clear()
-      parser()
-    elif scelta == "n":
-      clear()
-      exit(f"{bcolors.WARNING}Script terminato con successo.{bcolors.ENDC}")
+      continue
 
   countLog = 0
 
