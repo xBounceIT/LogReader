@@ -73,11 +73,21 @@ def outputMatrix(campo, riga):
       break
   return frase
 
+def logRead():
+
+  return
+
 # Funziona che chiede in input i log da leggere e parsa i file
 def parser():
   logs = []
-  nLog = int(input("Quanti log vuoi leggere?: "))
-  clear()
+  while True:
+    try:
+      nLog = int(input("Quanti log vuoi leggere?: "))
+      clear()
+      break
+    except ValueError:
+      clear()
+      print(f"{bcolors.WARNING}Valore inserito non numerico.{bcolors.ENDC}")
 
   if nLog == 0:
     clear()
@@ -92,30 +102,31 @@ def parser():
       parser()
     elif scelta == "n":
       clear()
-      exit("Termino...")
+      exit(f"{bcolors.WARNING}Script terminato con successo.{bcolors.ENDC}")
 
   countLog = 0
 
   for i in range(0, nLog):
-    print("Inserisci la path del", i + 1, "log: ")
-    log = input()
-    clear()
     while True:
-      try:
+      try:   
+        print("Inserisci la path del", i + 1, "log: ")
+        log = input()
+        clear()
+        print(f"Caricamento di{bcolors.OKCYAN}", log, f"{bcolors.ENDC}in corso...")
         with open(log, "rt") as f:
           f = f.readlines()
           logs.append(f)
           countLog += 1
           break
       except FileNotFoundError:
+        clear()
         scelta = input("File non trovato, reinserire? [y/n]: ")
         scelta = scelta.lower()
         while scelta != "y" and scelta != "n":
+          clear()
           scelta = input("Risposta invalida, reinserire? [y/n]: ")
           scelta = scelta.lower()
         if scelta == "y":
-          print("Inserisci la path del", i + 1, "log: ")
-          log = input()
           continue
         elif scelta == "n":
           print("Salto...")
