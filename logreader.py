@@ -19,7 +19,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader v0.5\n")
+  print("\nLogReader v0.5.1\n")
   return 0
 
 # Classe per i colori del testo
