@@ -40,7 +40,7 @@ v0.5.1
 v0.5.2
 - Added loading screen for big log reading
 - Removed empty function
-- Simplified loop-login for 0 logs
+- Simplified loop-logic for 0 logs
 
 v0.5.3
 - Simplified menu redundancy to improve performance.
