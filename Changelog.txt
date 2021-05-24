@@ -42,6 +42,9 @@ v0.5.2
 - Removed empty function
 - Simplified loop-login for 0 logs
 
+v0.5.3
+- Simplified menu redundancy to improve performance.
+
 v0.6 Roadmap
 - Define noInput() function
 - Handle more exceptions

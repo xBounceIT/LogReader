@@ -19,7 +19,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader v0.5.2\n")
+  print("\nLogReader v0.5.3\n")
   return 0
 
 # Classe per i colori del testo
@@ -201,15 +201,14 @@ def fieldSearch(logs):
   return 0
 
 def menu(logs):
-  print("\nMENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n4. Esci\n")
   while True:
     try:
+      print("\nMENU:\n1. Panoramica generale dei log scelti\n2. Ricerca ip\n3. Ricerca campi specifici\n4. Esci\n")
       scelta = int(input("Selezionare un opzione: "))
       break
     except ValueError:
       clear()
       print(f"{bcolors.WARNING}Valore inserito non numerico.{bcolors.ENDC}")
-      menu(logs)
   clear()
 
   while scelta < 1 or scelta > 4:
