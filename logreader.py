@@ -19,7 +19,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader v0.5.4\n")
+  print("\nLogReader v0.5.5\n")
   return 0
 
 # Classe per i colori del testo
@@ -139,13 +139,19 @@ def noInput(logs):
   return 0
 
 def ipSearch(logs):
-  ip = input("Inserisci l'IP da ricercare: ")
-  dots, cont = 0
+  dots = 0
+  cont = 0
+  numbers = 0
+  ip = input("Inserisci l'IP da ricercare: ")    
+  
+  # check formato ip
   for c in ip:
     if c == ".":
       dots += 1
+    elif c.isdigit():
+      numbers += 1
   
-  if dots != 3:
+  if dots != 3 or numbers > 12 or numbers < 4:
     clear()
     print(f"L'IP{bcolors.WARNING}", ip, f"{bcolors.ENDC}non è formattato correttamente")
     ipSearch(logs)
