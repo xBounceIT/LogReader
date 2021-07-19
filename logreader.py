@@ -139,16 +139,17 @@ def noInput(logs):
   return 0
 
 def ipSearch(logs):
-  ip = input("Inserisci l'ip da ricercare: ")
-  dots = 0
+  ip = input("Inserisci l'IP da ricercare: ")
+  dots, cont = 0
   for c in ip:
     if c == ".":
       dots += 1
   
   if dots != 3:
-    print(f"L'ip{bcolors.WARNING}", ip, f"{bcolors.ENDC}non e' formattato correttamente")
+    clear()
+    print(f"L'IP{bcolors.WARNING}", ip, f"{bcolors.ENDC}non è formattato correttamente")
     ipSearch(logs)
-  cont = 0
+
   for riga in logs:
     for campo in riga:
       if riga[campo] == ip:
