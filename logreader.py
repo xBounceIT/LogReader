@@ -19,7 +19,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader v0.5.3\n")
+  print("\nLogReader v0.5.4\n")
   return 0
 
 # Classe per i colori del testo
@@ -132,18 +132,29 @@ def parser():
 
 # TODO #
 def noInput(logs):
-  
+  cntIp = 0
+  cntSrc = 0
+  cntPort = 0
+    
   return 0
 
 def ipSearch(logs):
   ip = input("Inserisci l'ip da ricercare: ")
+  dots = 0
+  for c in ip:
+    if c == ".":
+      dots += 1
+  
+  if dots != 3:
+    print(f"L'ip{bcolors.WARNING}", ip, f"{bcolors.ENDC}non e' formattato correttamente")
+    ipSearch(logs)
   cont = 0
   for riga in logs:
     for campo in riga:
       if riga[campo] == ip:
         cont += 1
   clear()
-  print(f"L'IP è stato trovato{bcolors.WARNING}", cont, f"{bcolors.ENDC}volte")
+  print(f"L'IP{bcolors.WARNING}", ip, f"{bcolors.ENDC}è stato trovato{bcolors.WARNING}", cont, f"{bcolors.ENDC}volte")
   menu(logs)
   return 0
 
