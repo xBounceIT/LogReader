@@ -1,6 +1,6 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
-from os import system, truncate
+from os import system
 
 def clear():
   system('cls')
