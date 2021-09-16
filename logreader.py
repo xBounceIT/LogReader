@@ -1,10 +1,6 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
 from os import system
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 def clear():
   system('cls')
   return 0
@@ -135,15 +131,12 @@ def parser():
 
 # TODO #
 def noInput(logs):
-<<<<<<< Updated upstream
+
   cntIp = 0
   cntSrc = 0
   cntPort = 0
     
-=======
   count = 0
-  
->>>>>>> Stashed changes
   return 0
 
 def ipSearch(logs):
