@@ -1,7 +1,10 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
 from os import system
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 def clear():
   system('cls')
   return 0
@@ -98,8 +101,8 @@ def parser():
         print("Inserisci la path del", i + 1, "log: ")
         log = input()
         clear()
-        print(f"Caricamento di{bcolors.OKCYAN}", log, f"{bcolors.ENDC}in corso...")
         with open(log, "rt") as f:
+          print(f"Lettura di{bcolors.OKCYAN}", log, f"{bcolors.ENDC}in corso...")
           f = f.readlines()
           logs.append(f)
           countLog += 1
@@ -132,10 +135,15 @@ def parser():
 
 # TODO #
 def noInput(logs):
+<<<<<<< Updated upstream
   cntIp = 0
   cntSrc = 0
   cntPort = 0
     
+=======
+  count = 0
+  
+>>>>>>> Stashed changes
   return 0
 
 def ipSearch(logs):
