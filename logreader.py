@@ -129,14 +129,21 @@ def parser():
       matriceDiz.append(tabella(linea))
   return matriceDiz
 
-# TODO #
-def noInput(logs):
+# Elabora le linee all'interno del log e crea un dizionario usando i valori di listaCampi come chiavi
+def noInput(lsDiz):
+  #listaCampi = ['src','dst']
+  newDic = {}
 
-  cntIp = 0
-  cntSrc = 0
-  cntPort = 0
-    
-  count = 0
+  for dz in lsDiz:
+    #for campo in listaCampi:
+    if dz['src'] in newDic:
+      newDic[dz['src']] += 1
+    else:
+      newDic[dz['src']] = 1
+
+  for ip, volte in newDic.items():
+    print("L'indirizzo IP " + ip + " e' stato trovato " + str(volte) + " volte")
+
   return 0
 
 def ipSearch(logs):
