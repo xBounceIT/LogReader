@@ -45,10 +45,9 @@ v0.5.2
 v0.5.3
 - Simplified menu redundancy to improve performance.
 
-v0.6 Roadmap
-- Define noInput() function
-- Handle more exceptions
-- Define check if ip in ipSearch() input is actually an ip
+v0.5.6
+- Defined noInput function
+- Added format check for ipSearch function
 
 v1.0 Milestone
 - Improve log reading performance by using iter()
