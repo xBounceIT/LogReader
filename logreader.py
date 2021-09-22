@@ -18,7 +18,7 @@ def syncsec():
   print("         \$$$$$$  |                                                                                 \$$$$$$  |")
   print("          \______/                                                                                   \______/ \n")
   
-  print("\nLogReader v0.5.5\n")
+  print("\nLogReader v0.5.6\n")
   return 0
 
 # Classe per i colori del testo
@@ -131,19 +131,33 @@ def parser():
 
 # Elabora le linee all'interno del log e crea un dizionario usando i valori di listaCampi come chiavi
 def noInput(lsDiz):
-  #listaCampi = ['src','dst']
-  newDic = {}
+  srcDic = {}
+  dstDic = {}
 
+  # Per ogni dizionario nella lista dei dizionari estrapola i valori delle chiavi src e dst
   for dz in lsDiz:
-    #for campo in listaCampi:
-    if dz['src'] in newDic:
-      newDic[dz['src']] += 1
+    if dz['src'] in srcDic:
+      srcDic[dz['src']] += 1
     else:
-      newDic[dz['src']] = 1
+      srcDic[dz['src']] = 1
+    if dz['dst'] in dstDic:
+      dstDic[dz['dst']] += 1
+    else:
+      dstDic[dz['dst']] = 1
 
-  for ip, volte in newDic.items():
-    print("L'indirizzo IP " + ip + " e' stato trovato " + str(volte) + " volte")
-
+  # Printa i primi 5 risultati e si ferma
+  cont = 0
+  for ip, volte in srcDic.items():
+    print(f"L'indirizzo IP {bcolors.WARNING}" + ip + f"{bcolors.ENDC} ha tentato di effettuare connessioni {bcolors.WARNING}" + str(volte) + f"{bcolors.ENDC} volte")
+    cont += 1
+    if cont == 5:
+      break
+  cont = 0
+  for ip, volte in dstDic.items():
+    print(f"La VM all'indirizzo {bcolors.WARNING}" + ip + f"{bcolors.ENDC} ha ricevuto {bcolors.WARNING}" + str(volte) + f"{bcolors.ENDC} connessioni")
+    cont += 1
+    if cont == 5:
+      break
   return 0
 
 def ipSearch(logs):
