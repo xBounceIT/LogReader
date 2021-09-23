@@ -288,7 +288,7 @@ def main():
   cercaIpBtn = tk.Button(leftMenu, fg="white", text="Cerca IP", bg="grey")
   cercaIpBtn.place(relwidth=1, relheight=0.2)
 
-  openFile = tk.Button(root, text="Open file", padx=10, pady=8, fg="white", bg="black", command=getFile)
+  openFile = tk.Button(root, text="Open file", padx=10, pady=15, fg="white", bg="black", command=getFile)
   openFile.pack()
 
   root.mainloop()
