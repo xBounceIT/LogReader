@@ -1,6 +1,9 @@
 # Sviluppato da Daniel D'Angeli e Ugo Monticone, email: daniel.dangeli@syncsecurity.it
 
+import tkinter as tk
+from tkinter import Frame, filedialog, Text
 from os import system
+
 def clear():
   system('cls')
   return 0
@@ -265,12 +268,36 @@ def menu(logs):
   elif scelta == 4:
     exit(f"{bcolors.WARNING}Script terminato con successo.{bcolors.ENDC}")
 
+# Mostra la finestra di selezione file e ne prende la path
+def getFile():
+  lsLogs = []
+  logs = filedialog.askopenfilename(initialdir="/", title="Seleziona File", filetypes=(("text","*.txt"),("all files","*.*")))
+  lsLogs.append(logs)
+
 # Main Thread
 def main():
-  syncsec()
-  logs = parser()
-  clear()
-  menu(logs)
+  
+  root = tk.Tk()
+
+  canvas = tk.Canvas(root, height=600, width=1200, bg="#fff")
+  canvas.pack()
+
+  leftMenu = tk.Frame(root, bg="grey")
+  leftMenu.place(relwidth=0.15, relheight=1)
+
+  cercaIpBtn = tk.Button(leftMenu, fg="white", text="Cerca IP", bg="grey")
+  cercaIpBtn.place(relwidth=1, relheight=0.2)
+
+  openFile = tk.Button(root, text="Open file", padx=10, pady=8, fg="white", bg="black", command=getFile)
+  openFile.pack()
+
+  root.mainloop()
+  
+  
+  #syncsec()
+  #logs = parser()
+  #clear()
+  #menu(logs)
   return 0
 
 # Condizione che verifica se lo script fa parte di un modulo oppure se lo script e' solo in esecuzione. Se e' solo in esecuzione fa partire il main thread
